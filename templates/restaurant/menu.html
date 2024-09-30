@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% load custom_filter %}
+{% block title %}{{ restaurant.name }} menu{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/restaurant/menu.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1 class="blog_taital">منو</h1>
+        <div class="about_restaurant">
+            <div class="about_restaurant_image">
+                {% if restaurant.image %}
+                    <img class="responsive-image" src="{{ restaurant.image.url }}"
+                         alt="{{ restaurant.name }} Restaurant">
+                {% else %}
+                    <p>No image available for this restaurant.</p>
+                {% endif %}
+            </div>
+            <div class="about_restaurant_text">
+                <p>{{ restaurant.name }}</p>
+                <p>امتیاز : {{ avg_rate }}</p>
+            </div>
+        </div>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div class="opinions-container">
+            {% for opinion in opinions %}
+                {% if opinion.comment is not None %}
+                    <div class="opinion">
+                        {{ opinion.comment }}
+                        <div class="opinion_items">
+                            {% for item in opinion.order.show_items %}
+                                <p>{{ item.food }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <form id="foodForm" method="post">
+            {% csrf_token %}
+            <input type="hidden" id="restaurantId" name="restaurant_id" value="{{ restaurant.id }}">
+            <ul class="food_list">
+                {% for food in foods %}
+                    <li class="food_item">
+                        <div>
+                            {% if food.image %}
+                                <img class="responsive-image" src="{{ food.image.url }}" alt="{{ food.name }}">
+                            {% else %}
+                                <p>No image available for this food.</p>
+                            {% endif %}
+                        </div>
+                        <div class="food_item_text">
+                            <p><strong>{{ food.name }}</strong></p>
+                            <p>description: {{ food.description }}</p>
+                            <p>قیمت : {{ food.price }}</p>
+                            <label for="{{ food.id }}">
+                                <input type="number" id="{{ food.id }}" name="{{ food.name }}" min="0"
+                                       value="{{ selected_items|get_item:food.id }}">
+                            </label>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% if user.is_authenticated %}
+                <button type="submit" class="complete_order">تکمیل خرید
+                </button>
+            {% endif %}
+        </form>
+    </main>
+    <script src="{% static 'javascript/restaurant/menu.js' %}"></script>
+{% endblock %}

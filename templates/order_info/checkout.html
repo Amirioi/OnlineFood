@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <main>
+        <h1 style="margin: auto;text-align: center;">Check Out</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            {% for item in order.show_items %}
+                <p>{{ item.food }} {{ item.quantity }}</p>
+            {% endfor %}
+        </div>
+        <p>{{ order.get_total_cost }}</p>
+        <a href="{% url 'OrderApp:pay' %}">finish</a>
+    </main>
+{% endblock %}

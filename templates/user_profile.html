@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block title %}{{ user.first_name }}'s Profile{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>User Profile</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            <p><strong>First Name:</strong> {{ user.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+            <p><strong>Phone Number:</strong> {{ user.phone_number }}</p>
+            <p><strong>Address:</strong> {{ user.address }}</p>
+        </div>
+        {% if user.role == 'C' %}
+            <a href="{% url 'UserApp:user_restaurant_requests' %}">become restaurant</a>
+        {% endif %}
+        {% if user.role != 'R' %}
+            <button id="edit-button">Edit information</button>
+            <div id="edit-form" style="display: none">
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="new_first_name">New first name</label>
+                    <input type="text" id="new_first_name" name="new_first_name"><br>
+
+                    <label for="new_last_name">New last name</label>
+                    <input type="text" id="new_last_name" name="new_last_name"><br>
+
+                    <label for="new_address">New address</label>
+                    <input type="text" id="new_address" name="new_address"><br>
+
+                    <button type="submit">Save changes</button>
+                </form>
+            </div>
+        {% endif %}
+
+        <script>
+            document.getElementById("edit-button").addEventListener("click", function () {
+                const form = document.getElementById("edit-form");
+                if (form.style.display === "none" || form.style.display === "") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            });
+        </script>
+    </main>
+{% endblock %}

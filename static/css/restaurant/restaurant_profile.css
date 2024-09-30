@@ -1,0 +1,24 @@
+.food_item {
+    border: #673AB7 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 45%;
+    list-style: none;
+}
+
+.food_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    max-height: 200px;
+}

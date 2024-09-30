@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}active orders{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Active Orders</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% for order in orders %}
+            <div class="order" data-order-id="{{ order.id }}">
+                {% for item in order.show_items %}
+                    <p>{{ item.food }} {{ item.quantity }}</p>
+                {% endfor %}
+                <button class="change-status-btn">Change Status</button>
+            </div>
+        {% endfor %}
+    </main>
+    <script src="{% static 'javascript/restaurant/active_orders.js' %}"></script>
+{% endblock %}
+

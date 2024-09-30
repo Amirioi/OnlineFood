@@ -1,0 +1,59 @@
+.food_item {
+    border: #673AB7 2px solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 45%;
+    list-style: none;
+    display: flex;
+}
+
+.food_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 0;
+}
+
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    max-height: 200px;
+}
+
+.complete_order {
+    width: 96%;
+    padding: 20px;
+    margin: 2%;
+    background-color: #ff00a6;
+    font-weight: bolder;
+    font-size: 20px;
+    border-radius: 5px;
+}
+
+.food_item_text {
+    margin: auto;
+    direction: rtl;
+}
+
+.food_item_text p {
+    width: fit-content;
+}
+
+.about_restaurant p {
+    direction: rtl;
+    width: fit-content;
+}
+
+.about_restaurant {
+    padding: 10px;
+    margin: 35px;
+    display: flex;
+    direction: rtl;
+}
+
+.about_restaurant_text {
+    padding: 30px;
+}
