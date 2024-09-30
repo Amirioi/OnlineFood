@@ -1,0 +1,24 @@
+{% extends 'base/base.html' %}
+
+{% block title %}new opinion{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>new opinion</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            <label for="rating">Rating:</label>
+            <input type="number" name="rating" id="rating" min="0" max="5" required>
+            <label for="comment">Comment:</label>
+            <textarea name="comment" id="comment"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+{% endblock %}

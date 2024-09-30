@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+
+{% block title %}restaurant registration{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>restaurant registration</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="restaurant_name">Restaurant Name:</label>
+            <input type="text" id="restaurant_name" name="restaurant_name" required><br><br>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required></textarea><br><br>
+
+            <label for="image_profile">Upload Image:</label>
+            <input type="file" id="image_profile" name="image_profile" accept="image/*"><br><br>
+
+            <label for="pdf_document">Upload PDF:</label>
+            <input type="file" id="pdf_document" name="pdf_document"><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+{% endblock %}

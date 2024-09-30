@@ -1,0 +1,135 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}{{ restaurant.name }} profile{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/restaurant/restaurant_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>profile</h1>
+
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <div>
+            <h2>Opening Hours</h2>
+            <form method="post">
+                {% csrf_token %}
+                <table>
+                    <tr>
+                        <th>Day</th>
+                        <th>Open</th>
+                        <th>Close</th>
+                    </tr>
+                    <tr>
+                        <td>Monday</td>
+                        <td><label>
+                            <input type="time" name="Monday_open" value="{{ restaurant.opening_hours.Monday.open }}">
+                        </label>
+                        </td>
+                        <td><label>
+                            <input type="time" name="Monday_close" value="{{ restaurant.opening_hours.Monday.close }}">
+                        </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Tuesday</td>
+                        <td><label>
+                            <input type="time" name="Tuesday_open" value="{{ restaurant.opening_hours.Tuesday.open }}">
+                        </label>
+                        </td>
+                        <td><label>
+                            <input type="time" name="Tuesday_close"
+                                   value="{{ restaurant.opening_hours.Tuesday.close }}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Wednesday</td>
+                        <td><label>
+                            <input type="time" name="Wednesday_open"
+                                   value="{{ restaurant.opening_hours.Wednesday.open }}">
+                        </label></td>
+                        <td><label>
+                            <input type="time" name="Wednesday_close"
+                                   value="{{ restaurant.opening_hours.Wednesday.close }}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Thursday</td>
+                        <td><label>
+                            <input type="time" name="Thursday_open"
+                                   value="{{ restaurant.opening_hours.Thursday.open }}">
+                        </label></td>
+                        <td><label>
+                            <input type="time" name="Thursday_close"
+                                   value="{{ restaurant.opening_hours.Thursday.close }}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Friday</td>
+                        <td><label>
+                            <input type="time" name="Friday_open" value="{{ restaurant.opening_hours.Friday.open }}">
+                        </label>
+                        </td>
+                        <td><label>
+                            <input type="time" name="Friday_close" value="{{ restaurant.opening_hours.Friday.close }}">
+                        </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td><label>
+                            <input type="time" name="Saturday_open"
+                                   value="{{ restaurant.opening_hours.Saturday.open }}">
+                        </label></td>
+                        <td><label>
+                            <input type="time" name="Saturday_close"
+                                   value="{{ restaurant.opening_hours.Saturday.close }}">
+                        </label></td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td><label>
+                            <input type="time" name="Sunday_open" value="{{ restaurant.opening_hours.Sunday.open }}">
+                        </label>
+                        </td>
+                        <td><label>
+                            <input type="time" name="Sunday_close" value="{{ restaurant.opening_hours.Sunday.close }}">
+                        </label>
+                        </td>
+                    </tr>
+                </table>
+                <button type="submit">Update</button>
+            </form>
+        </div>
+
+        <div>
+            <h2>foods</h2>
+            <ul class="food_list">
+                {% for food in foods %}
+                    <li class="food_item">
+                        {% if food.image %}
+                            <img class="responsive-image" src="{{ food.image.url }}" alt="{{ food.name }}">
+                        {% else %}
+                            <p>No image available for this food.</p>
+                        {% endif %}
+                        <p>{{ food.name }}</p>
+                        <p>description: {{ food.description }}</p>
+                        <p>category: {{ food.category }}</p>
+                        <p>price: {{ food.price }}</p>
+                        <p>statsu: {{ food.status }}</p>
+                        <p><a href="{% url 'RestaurantApp:edit_food' fid=food.id %}">edit</a></p>
+                    </li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'RestaurantApp:add_food' %}">Add new Food</a>
+        </div>
+    </main>
+    <script src="{% static 'javascript/restaurant/restaurant_profile.js' %}"></script>
+{% endblock %}

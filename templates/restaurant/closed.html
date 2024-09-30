@@ -1,0 +1,18 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Closed{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Closed {{ restaurant.name }}</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </main>
+{% endblock %}

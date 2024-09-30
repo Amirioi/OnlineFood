@@ -1,0 +1,37 @@
+{% extends 'base/base.html' %}
+{% block title %}Home{% endblock %}
+{% load static %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <main>
+        <div class="blog_section layout_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="blog_taital">نتایج</h1>
+                    </div>
+                </div>
+                <div class="blog_section_2">
+                    <div class="row">
+                        {% for restaurant in restaurants %}
+                            <div class="col-md-4">
+                                <div class="blog_box active">
+                                    <div class="blog_img"><img src="{{ restaurant.image.url }}"></div>
+                                    <h4 class="burger_text active">{{ restaurant.name }}</h4>
+                                    {% if restaurant.is_open %}
+                                        <h6 class="time_text">
+                                            <a href="{{ restaurant.get_absolute_url }}">مشاهده منو</a>
+                                        </h6>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

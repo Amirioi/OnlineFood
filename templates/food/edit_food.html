@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Edit food{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Edit food</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <label for="new_name">Name:</label>
+                <input type="text" id="new_name" name="new_name" value="{{ food.name }}" required><br><br>
+
+                <label for="new_description">Description:</label>
+                <textarea id="new_description" name="new_description" required>{{ food.description }}</textarea><br><br>
+
+                <label for="new_category">Category:</label>
+                <select id="new_category" name="new_category" required>
+                    {% for key, value in food.CATEGORY_CHOICES %}
+                        <option value="{{ key }}" {% if food.category == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="new_price">Price:</label>
+                <input type="number" id="new_price" name="new_price" value="{{ food.price }}" required><br><br>
+
+                <label for="new_status">Status:</label>
+                <select id="new_status" name="new_status" required>
+                    {% for key, value in food.STATUS_CHOICES %}
+                        <option value="{{ key }}" {% if food.status == key %}selected{% endif %}>{{ value }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="new_image">Image:</label>
+                <input type="file" id="new_image" name="new_image"><br><br>
+
+                <button type="submit">Save changes</button>
+            </form>
+        </div>
+        <div>
+            <p><a href="{% url 'RestaurantApp:delete_food' fid=food.id %}">Delete Food</a></p>
+        </div>
+    </main>
+    <script src="{% static 'javascript/food/edit_food.js' %}"></script>
+{% endblock %}

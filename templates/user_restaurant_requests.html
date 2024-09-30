@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% block title %}restaurant registration{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>All requests</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <ul>
+            {% for application in applications %}
+                <li> id: {{ application.id }} date: {{ application.request_date }} status: {{ application.status }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'UserApp:restaurant_registration' %}">new request</a>
+    </main>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base/base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <main>
+        <h1 style="margin: auto;text-align: center;">Cart</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% for order in orders %}
+            <div>
+                {% for item in order.show_items %}
+                    <p>{{ item.food }} {{ item.quantity }}</p>
+                {% endfor %}
+                <a href="{{ order.restaurant.get_absolute_url }}">complete order</a>
+            </div>
+        {% endfor %}
+    </main>
+{% endblock %}

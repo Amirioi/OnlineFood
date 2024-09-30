@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Page Title{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/others/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/others/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/others/responsive.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/others/jquery.mCustomScrollbar.min.css' %}">
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="{% static 'css/base/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base/header.css' %}">
+    {% block head %} {% endblock %}
+</head>
+<body>
+{% include 'base/header.html' %}
+{% block content %}
+    <!-- Default content if not overridden in child templates -->
+{% endblock %}
+{% include 'base/footer.html' %}
+</body>
+</html>

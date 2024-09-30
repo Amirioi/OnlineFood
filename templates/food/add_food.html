@@ -1,0 +1,50 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Add food{% endblock %}
+{% block head %}
+{% endblock %}
+
+{% block content %}
+    <main>
+        <h1>Add food</h1>
+        {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                <label for="food_name">Name:</label>
+                <input type="text" id="food_name" name="food_name" required><br><br>
+
+                <label for="food_description">Description:</label><br>
+                <textarea id="food_description" name="food_description" required></textarea><br><br>
+
+                <label for="food_category">Category:</label>
+                <select id="food_category" name="food_category" required>
+                    {% for choice in categories %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="food_price">Price:</label>
+                <input type="number" id="food_price" name="food_price" required><br><br>
+
+                <label for="food_status">Status:</label>
+                <select id="food_status" name="food_status" required>
+                    {% for choice in status %}
+                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                    {% endfor %}
+                </select><br><br>
+
+                <label for="food_image">Image:</label>
+                <input type="file" id="food_image" name="food_image"><br><br>
+
+                <button type="submit">Edit Food</button>
+            </form>
+        </div>
+    </main>
+{% endblock %}
